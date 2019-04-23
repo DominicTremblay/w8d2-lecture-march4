@@ -46,10 +46,15 @@ RSpec.feature "Cars", type: :feature, js: true do
   scenario 'Filter cars by make' do
     
     visit '/cars'
+    save_screenshot('before.png')
 
-    fill_in 'Make', with: 'Tesla' 
-    click_button 'Search!'
+    expect(page).to have_text('All My Cars!')
 
+    # find('#make').set('Tesla')
+    within 'form' do
+      select 'Tesla', from: 'make'  
+      click_button 'Search!'
+    end
     expect(page).to have_text('Tesla T Sedan coupe XLE 2019', count: 1)
     expect(page).to_not have_text('Lincoln M3 Extended Cab Pickup XLE 1971')
     save_screenshot('filter_make.png')

@@ -12,7 +12,7 @@
 
         <div class="form-component">
       <%= label_tag(:model, 'Model ') %>
-      <%= select_tag(:make,
+      <%= select_tag(:model,
                      options_from_collection_for_select(Model.all, :id, :model),
                      include_blank: true) %>
     </div>
